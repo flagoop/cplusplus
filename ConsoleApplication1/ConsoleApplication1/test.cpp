@@ -275,6 +275,32 @@ void clsStrVec::chkFree()
 	}
 }
 
+ostream & operator<<(ostream & os, clsOperatorTest2 & obj)
+{
+	// TODO: 在此处插入 return 语句
+	for (auto c : obj.vecs)
+	{
+		os << c << " ";
+	}
+	return os;
+}
+
+ostream & operator<<(ostream & os, const clsOperatorTest & obj)
+{
+	// TODO: 在此处插入 return 语句
+	os << "s:" << obj.s << " i:" << obj.i << " d:" << obj.d << " ";
+	return os;
+}
+
+clsOperatorTest  operator+(const clsOperatorTest & obj1, const clsOperatorTest & obj2)
+{
+	// TODO: 在此处插入 return 语句
+	clsOperatorTest obj;
+	obj += obj1;
+	obj += obj2;
+	return obj;
+}
+
 ostream& operator<<(ostream &os, const clsStrVec &obj)
 {
 	auto pb = obj.pStrElements;

@@ -1,8 +1,115 @@
 #pragma once
 #include"stdafx.h"
 
+class clsTest8
+{
+public:
 
+	void operator()(istream& is = cin)
+	{
+		cout << "type string list:" << endl;
+		while (is >> s)
+		{
+			if (is)
+			{
+				cout <<"your type is: "<< s << endl;
+				vec_Str.push_back(s);
+			}
+			else
+			{
+				cout << "error" << endl;
+			}
 
+		}
+	}
+	void pt()const
+	{
+		cout << "vector is:" << endl;
+		for (auto c:vec_Str)
+		{
+			cout << c << endl;
+		}
+	}
+protected:
+private:
+	string	s;
+	vector<string>	vec_Str;
+};
+
+class clsTest7
+{
+public:
+	clsTest7(ostream &os = cout, char ch = ' ') :os(os), ch(ch) {}
+	void operator()(int i1, int i2, int i3)
+	{
+		if (i1>10)
+		{
+			os << i2;
+		}
+		else
+		{
+			os << i3;
+		}
+	}
+protected:
+private:
+	ostream & os;
+	char	ch;
+};
+
+class clsAbs
+{
+public:
+	int operator()(int i) { return i < 0 ? -i : i; }
+protected:
+private:
+
+};
+
+class clsOperatorTest2
+{
+public:
+	clsOperatorTest2() = default;
+	clsOperatorTest2(const initializer_list<string> &il) :vecs(il){}
+
+	friend ostream& operator<<(ostream& os, clsOperatorTest2 &obj);
+
+	string&	operator[](size_t n) { return vecs[n]; }
+	const string	operator[](size_t n)const { return vecs[n]; }
+
+	string& operator*() { return	vecs[0]; }
+	//string* operator->() { return	&vecs[0]; }
+	vector<string>* operator->() { return &vecs; }
+protected:
+private:
+	vector<string> vecs;
+};
+
+class clsOperatorTest
+{
+public:
+	clsOperatorTest(string	&&s=string(), int i=0, double d=0.0)
+		:s(s), i(i), d(d) {};
+	
+	friend	ostream& operator<<(ostream& os, const clsOperatorTest &obj);
+	clsOperatorTest & operator+=(const clsOperatorTest &obj)
+	{
+		s += obj.s;
+		i += obj.i;
+		d += obj.d;
+		return *this;
+	}
+protected: 
+private:
+	string	s;
+	int		i;
+	double	d;
+};
+
+//这和类成员函数本就返回this对象的引用是不同的
+//clsOperatorTest& operator+(const clsOperatorTest &obj1, const clsOperatorTest &obj2);
+
+clsOperatorTest operator+(const clsOperatorTest &obj1, const clsOperatorTest &obj2);
 
 //模拟vector<string>
 class clsStrVec
