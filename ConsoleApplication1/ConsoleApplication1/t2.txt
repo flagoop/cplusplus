@@ -1,0 +1,169 @@
+// ConsoleApplication1.cpp: 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include "test.h"
+
+//using	std::placeholders::_1;
+using	namespace std::placeholders;
+#define	BUFFER_SIZE	100
+
+
+/*
+VOID wcs2mbs(LPCOLESTR wcstr, char* chResult)
+{
+	size_t wLen = wcslen(wcstr) + 1;  // 宽字符字符长度，+1表示包含字符串结束符  
+	auto aLen = WideCharToMultiByte(CP_ACP, 0, wcstr, wLen, NULL, 0, NULL, NULL);
+
+	LPSTR lpa = new char[aLen];
+	WideCharToMultiByte(CP_ACP, 0, wcstr, wLen, lpa, aLen, NULL, NULL);
+	strcpy_s(chResult, 200, lpa);
+	delete[] lpa;
+	lpa = NULL;
+}
+
+bool UnicodeToAnsi(wchar_t* lpString, char* szAnsi)//(in,out)  
+{
+	size_t nLen = wcslen(lpString) * 2, nReturnLen;//wcslen <string.h>   
+	char* lpszBuf = (char*)malloc(nLen);//malloc <stdlib.h> and <malloc.h>   
+	size_t	convers = 0;
+	_wsetlocale(LC_ALL, L"zh-CN");
+	nReturnLen = wcstombs_s(&convers,szAnsi,nLen, lpString, _TRUNCATE);//wcstombs <stdlib.h>   
+	if (nReturnLen < 0)
+	{
+		free(lpszBuf);
+		return false;
+	}
+	strcpy_s(szAnsi,nLen, lpszBuf);
+	cout << lpszBuf << endl;
+	return true;
+}
+*/
+
+void	shortening(string &s, const string &oldVal, const string &newVal)
+{
+	auto it = s.find(oldVal);
+	s.replace(it, size(oldVal), newVal);
+
+}
+
+string	&prefixName(string &s)
+{
+	s.insert(0, "Mr.");
+	s.append("III");
+	return s;
+}
+
+bool	funTest3(const string &s1)
+{
+	return s1.size() >= 5;
+}
+
+bool	isShorter(const string &s1, const string &s2)
+{
+	return s1.size() < s2.size();
+}
+
+bool	funTest4(const string	&s)
+{
+	if (s.find('2', 0)!=s.size())
+	{
+		return true;
+	}
+	
+	return false;
+}
+
+bool	funTest5(int i, int j)
+{
+	if ((j - i) == 2)
+	{
+		return true;
+	}
+	else
+		return false;
+}
+
+bool	check_size(const string &s,size_t sz)
+{
+	return s.size() >= sz;
+}
+
+struct STR_test
+{
+	int	val;
+	string	name;
+	void pt()const { cout << val << "  " << name << endl; }
+
+};
+
+
+class CLS_test
+{
+	int	val;
+	string	name;
+public:
+	void pt()const { cout << val << "  " << name << endl; }
+};
+
+struct myComp2
+{
+	bool	operator()(const STR_test &st1, const STR_test &st2)
+	{
+		//return	st1.name < st2.name;
+		return st1.val < st2.val;
+	}
+};
+
+bool	myComp(const STR_test& st1,const STR_test &st2)
+{
+	return	st1.name < st2.name;
+}
+
+bool	myCompTest(const STR_test& st1, const STR_test &st2)
+{
+	return	st1.name < st2.name;
+}
+using	funTest6 =bool (const STR_test &,const STR_test &);
+//bool(*funTest7)(const STR_test &, const STR_test &) = myCompTest;
+//typedef	bool(funTest6)(const STR_test &, const STR_test &);
+
+//using	funTest8 = bool (*)(const STR_test &, const STR_test &);
+
+namespace myspace
+{
+	int i = 20;
+	int j = 30;
+}
+
+int i = 100;
+
+namespace myspaceFun
+{
+	int mymax(int v1, int v2) { cout << "mysapceFun::mymax(int,int)\n"; return 1; }
+	double mymaxd(double d1, double d2) { cout << "myspaceFun::mymax(double,double)"; return 1.1; }
+}
+int mymax(int v1, int v2) { cout << "::mymax(int,int)\n"; return 1; }
+int mymax(double d1, double d2) { cout << "::mymax(double,double)"; return 1; }
+
+string::const_iterator	getNumIt(const string &str)
+{
+	set<char> set_C{ '1','2','3','4','5','6','7','8','9','0' };
+
+	auto it = find_if(str.begin(), str.end(), [set_C](auto &c)
+	{
+		for (auto &e : set_C)
+		{
+			if (c == e)
+			{
+				return true;
+			}
+		}
+		return false;
+	});
+	if (it==str.end())
+	{
+		return str.end();
+	}
+	
+	//string	strSub(it, str.end());
