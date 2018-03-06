@@ -2,7 +2,13 @@
 #include"stdafx.h"
 
 
-
+class clsTest7
+{
+public:
+	void operator()() { cout << "clsTest7 operator()" << endl; }
+protected:
+private:
+};
 
 //Ä£Äâvector<string>
 class clsStrVec
