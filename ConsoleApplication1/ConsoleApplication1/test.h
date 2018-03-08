@@ -1,6 +1,17 @@
 #pragma once
 #include"stdafx.h"
 
+
+class clsSizeComp
+{
+public:
+	clsSizeComp(size_t z):sz(z){}
+	bool operator()(const string &s) { return	s.size() > sz; }
+protected:
+private:
+	size_t	sz;
+};
+
 class clsTest8
 {
 public:
