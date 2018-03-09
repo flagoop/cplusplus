@@ -275,6 +275,21 @@ void clsStrVec::chkFree()
 	}
 }
 
+//加了const clsSizeCount &obj 是神马问题?
+//ofstream & operator<<(ofstream & os, const clsSizeCount & obj){	os<<obj.icount << endl;	return os;}
+ofstream & operator<<(ofstream & os, clsSizeCount & obj)
+{
+	os << obj.icount << endl;
+	return os; 
+}
+
+ostream & operator<<(ostream & os, clsOperatorTest3 & obj)
+{
+	// TODO: 在此处插入 return 语句
+	os << obj.i << endl;
+	return os;
+}
+
 ostream & operator<<(ostream & os, clsOperatorTest2 & obj)
 {
 	// TODO: 在此处插入 return 语句
