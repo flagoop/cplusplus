@@ -1,48 +1,6 @@
 #pragma once
 #include"stdafx.h"
 
-class clsTest9
-{
-public:
-	friend	clsTest9 operator+(const clsTest9 &obj1, const clsTest9 &obj2);
-
-	clsTest9(int i=0) :i(i){}
-	void pt()const { cout << "i=" << i << endl; }
-protected:
-private:
-	int i;
-};
-
-class clsOperatorTest3
-{
-public:
-	friend ostream& operator<<(ostream &os, clsOperatorTest3 &obj);
-	clsOperatorTest3(int i):i(i){}
-private:
-	int i;
-};
-
-class clsSizeCount
-{
-public:
-	friend	ofstream& operator<<(ofstream &os,clsSizeCount &obj); //error
-	//friend	ofstream& operator<<(ofstream &os, const clsSizeCount &obj); // const后编译不通过 不解
-	clsSizeCount(size_t z) :sz(z),icount(0) {}
-	//bool operator()(const string &s){return s.size() >= sz; }
-	void operator()(const string &s) 
-	{
-		if (s.size() == sz)
-		{
-			++icount;
-		}
-	}
-	void pt()const { cout << icount << endl; }
-protected:
-private:
-	size_t	sz;
-	int		icount;
-};
-
 
 class clsSizeComp
 {
