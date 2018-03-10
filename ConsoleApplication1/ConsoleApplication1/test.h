@@ -1,6 +1,18 @@
 #pragma once
 #include"stdafx.h"
 
+class clsTest9
+{
+public:
+	friend	clsTest9 operator+(const clsTest9 &obj1, const clsTest9 &obj2);
+
+	clsTest9(int i=0) :i(i){}
+	void pt()const { cout << "i=" << i << endl; }
+protected:
+private:
+	int i;
+};
+
 class clsOperatorTest3
 {
 public:
