@@ -1,6 +1,13 @@
 #pragma once
 #include"stdafx.h"
 
+class clsAdd
+{
+public:
+	int operator()(int i, int j) { return i + j; }
+protected:
+private:
+};
 
 class clsSizeComp
 {
