@@ -1,13 +1,26 @@
 #pragma once
 #include"stdafx.h"
 
+class clsTest10
+{
+public:
+	virtual	void pt() { cout << "clsTest10" << endl; }
+protected:
+private:
+};
+class clsSubTest10 :public clsTest10
+{
+public:
+	void pt() { cout << "clsSubTest10" << endl; }
+};
+
 class clsQuote
 {
 public:
 	clsQuote() = default;
 	clsQuote(const string& s,double d):bookno(s),dPrice(d){}
 	string	isbn()const { return bookno; }
-	double	net_price(int n) { return n * dPrice; }
+	virtual double	net_price(size_t n) { return	n*dPrice; }
 protected:
 	double	dPrice = 0.0;
 
@@ -18,13 +31,19 @@ private:
 class clsBulk_Quote:public clsQuote
 {
 public:
-	clsBulk_Quote(size_t szcnt, double d) :szCnt(szcnt), dDiscount(d) {}
-	double	net_price(int n) 
+	clsBulk_Quote(const string &s,double d, size_t szcnt = 10, double dd = 0.7) 
+		:clsQuote(s,d), szCnt(szcnt), dDiscount(dd) {}
+	double	net_price(size_t n) 
 	{
 		if (n>=szCnt)
 		{
+			return n * dPrice*dDiscount;
 		}
-		return n * dPrice*dDiscount; 
+		else
+		{
+			return	n * dPrice;
+		}
+		
 	}
 protected:
 private:
