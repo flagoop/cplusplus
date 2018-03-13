@@ -1,6 +1,48 @@
 #pragma once
 #include"stdafx.h"
 
+class clsQuote
+{
+public:
+	clsQuote() = default;
+	clsQuote(const string& s,double d):bookno(s),dPrice(d){}
+	string	isbn()const { return bookno; }
+	double	net_price(int n) { return n * dPrice; }
+protected:
+	double	dPrice = 0.0;
+
+private:
+	string	bookno;
+};
+
+class clsBulk_Quote:public clsQuote
+{
+public:
+	clsBulk_Quote(size_t szcnt, double d) :szCnt(szcnt), dDiscount(d) {}
+	double	net_price(int n) 
+	{
+		if (n>=szCnt)
+		{
+		}
+		return n * dPrice*dDiscount; 
+	}
+protected:
+private:
+	size_t	szCnt;
+	double	dDiscount;
+};
+
+class clsTest9
+{
+public:
+	clsTest9(int i = 0) :ival(i) {}
+	clsTest9& operator=(clsTest9 &obj) && {ival = obj.ival; return *this; }
+	void pt()const { cout << ival << endl; }
+protected:
+private:
+	int ival;
+};
+
 class clsAdd
 {
 public:
