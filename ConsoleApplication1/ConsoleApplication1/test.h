@@ -11,7 +11,10 @@ private:
 class clsSubTest10 :public clsTest10
 {
 public:
-	void pt() { cout << "clsSubTest10" << endl; }
+	void tt() { cout << "clsSubTest10::tt()" << endl; }
+	void pt()override { cout << "clsSubTest10" << endl; }
+	//void pt(int i)override { cout << "clsSubTest10" << endl; } //override可以帮我们发现编译时无法提示的错误
+	//override强制检查pt必须 是覆盖了的虚函数，形参必须与virtual声明时是一样的
 };
 
 class clsQuote
