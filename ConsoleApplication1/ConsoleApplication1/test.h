@@ -1,6 +1,67 @@
 #pragma once
 #include"stdafx.h"
 
+class clsTest12
+{
+public:
+	clsTest12() = default;
+	clsTest12(int i,const string &s):i(i),strName(s){}
+protected:
+	int i;
+private:
+	string strName;
+};
+class clsSubTest12:public clsTest12
+{
+public:
+	//void pt() { cout << "i=" << i <<"strname:"<<strName<< endl; }
+	void pt() { cout << "i=" << i << endl; }
+
+protected:
+private:
+};
+
+class clsBase
+{
+public:
+	string	name() { return strBaseName; }
+	virtual	void pt(ostream &os) { os <<"strBaseName="<< strBaseName << endl; }
+protected:
+private:
+	string strBaseName;
+};
+class clsDerived:public clsBase
+{
+public:
+	void pt(ostream &os)
+	{
+		//clsBase::pt(os);
+		os << "i=" << i << endl; 
+	}
+protected:
+private:
+	int i;
+};
+
+class clsTest11
+{
+public:
+	clsTest11() { cout << "clsTest11" << endl; }
+	virtual	void debug() { cout << "i=" << i << endl; }
+protected:
+private:
+	int i;
+};
+class clsSubTest11:public clsTest11
+{
+public:
+	clsSubTest11() { cout << "clsSubTest11" << endl; }
+	void debug() override { cout << "str=" << str << endl; }
+protected:
+private:
+	string str;
+};
+
 class clsTest10
 {
 public:
