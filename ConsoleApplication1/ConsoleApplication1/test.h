@@ -5,17 +5,40 @@ class clsTest12
 {
 public:
 	clsTest12() = default;
-	clsTest12(int i,const string &s):i(i),strName(s){}
+	clsTest12(int i,const string &s):pro_i(i), pri_strName(s){}
+	void pt1() { cout << "clsTest12::pt1()" << endl; }
 protected:
-	int i;
+	int pro_i;
 private:
-	string strName;
+	string pri_strName;
 };
+
+class clsSubProTest12:protected clsTest12
+{
+public:
+	void pt2() { cout << "pro_i:" << pro_i << endl; }
+	//void ppt2(clsTest12 &obj) { cout << obj.pro_i << endl; }
+	void ppt2(clsSubProTest12 &obj) { cout << obj.pro_i << endl; }
+protected:
+private:
+	int pri_j;
+};
+
+class clsSubPriTest12 :private clsTest12	//private访问限制只针对类clsSubPriTest12的对象作出了相应的访问限制
+											//如private刚限制了clsSubPriTest12的对象不能访问基类的所有成员及成员函数
+{
+public:
+	void pt3() { cout << "pro_i:" << pro_i << endl; }
+protected:
+private:
+	int pri_j2;
+};
+
 class clsSubTest12:public clsTest12
 {
 public:
-	//void pt() { cout << "i=" << i <<"strname:"<<strName<< endl; }
-	void pt() { cout << "i=" << i << endl; }
+	//void pt() { cout << "pro_i=" << pro_i <<"strname:"<<strName<< endl; }
+	void pt() { cout << "pro_i=" << pro_i << endl; }
 
 protected:
 private:
