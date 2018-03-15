@@ -1,6 +1,37 @@
 #pragma once
 #include"stdafx.h"
 
+class clsTest15
+{
+public:
+	clsTest15() { cout << "clsTest15()" << endl; }
+	clsTest15(int i) :i(i) { cout << "clsTest15(int)" << endl; }
+	clsTest15(const clsTest15 &obj) { cout << "clsTest15(const clsTest15&)" << endl; }
+	clsTest15(clsTest15 &&obj) { cout << "clsTest15(const clsTest15&&)" << endl; }
+	virtual	~clsTest15() { cout << "~clsTest15()" << endl; }
+protected:
+private:
+	int i;
+};
+class clsSubTest15:public	clsTest15
+{
+public:
+	//派生类在没有自定义构造的时候，会合成默认，拷贝和移动3类构造函数。
+	using	clsTest15 :: clsTest15;//注：这叫继承基类 的除 默认，拷贝和移动这3类的构造函数以外的所有构造函数
+	//这里就是继承了基类的 clsTest(int)这个构造
+
+	//clsSubTest15() { cout << "clsSubTest15()" << endl; }
+	//派生类如果使用合成的拷贝构造，编译器会为基类选择相应的形参对应版本的构造函数
+	//但如果派生类自定义了拷贝构造，则我们也必须显示指定基类的相应形参版本的构造函数，如下条代码
+	//否则基类会自作聪明的选择基类的默认构造函数
+	//clsSubTest15(const clsSubTest15 &obj):clsTest15(obj) { cout << "clsSubTest15(const clsSubTest15&)" << endl; }
+
+protected:
+private:
+};
+
+
+
 class clsTest14
 {
 public:
