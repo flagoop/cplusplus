@@ -4,18 +4,26 @@
 class clsTest14
 {
 public:
-	//virtual	~clsTest14() { cout << "~clsTest14" << endl; }
-	~clsTest14() { cout << "~clsTest14" << endl; }
+	clsTest14(int k = 0) :i(k) { cout << "clsTest14(int) default" << endl; }
+	virtual	~clsTest14() { cout << "~clsTest14" << endl; } //可以实现先析构派生类，再析构基类
+	//~clsTest14() { cout << "~clsTest14" << endl; } 基类指针*pb指向派生类时，delete pb,派生类的析构不会调用 
+		//而直接调用基类的析构
 
 protected:
 private:
+	int i;
 };
 class clsSubTest14:public clsTest14
 {
 public:
-	//~clsSubTest14() { cout << "~clsSubTest14" << endl; }
+	clsSubTest14() { cout << "clsSubTest14 default" << endl; }
+	clsSubTest14(int k) :clsTest14(k), j(k) { cout << "clsSubTest14(int)" << endl; }
+	clsSubTest14(const clsSubTest14 &obj) :clsTest14(obj) { cout << "clsSubTest14:copy" << endl; }
+	~clsSubTest14() { cout << "~clsSubTest14" << endl; } //若基类析构为virtual 则由上 delete pb时，会动态绑定
+		//调用此析构
 protected:
 private:
+	int j;
 };
 
 class clsTest13
