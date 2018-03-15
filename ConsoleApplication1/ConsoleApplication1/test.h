@@ -1,6 +1,48 @@
 #pragma once
 #include"stdafx.h"
 
+class clsTest14
+{
+public:
+	//virtual	~clsTest14() { cout << "~clsTest14" << endl; }
+	~clsTest14() { cout << "~clsTest14" << endl; }
+
+protected:
+private:
+};
+class clsSubTest14:public clsTest14
+{
+public:
+	//~clsSubTest14() { cout << "~clsSubTest14" << endl; }
+protected:
+private:
+};
+
+class clsTest13
+{
+public:
+	void f1() { cout << "clsTest13::f1()" << endl; }
+	void f1(int i) { cout << "clsTest13::f1(int)" << endl; }
+	void f1(string s) { cout << "clsTest13::f1(string)" << endl; }
+protected:
+private:
+};
+class clsSubTest13 :public clsTest13
+{
+public:
+	using	clsTest13::f1;
+	void f1() { cout << "clsSubTest13::f1()" << endl; }	//编译器查找函数名 原则是名字优先于形参列表，所以clsSubTest13
+		//的对象调用f1(int)时将会报错，无可用函数f1(int) 继承类一个f1函数名将覆盖基类的所有f1的3个不同形参的函数
+		//using 作用 是将基类中的所有f1的3个不同形参的函数全部显示填写在了clsSubTest13的作用域中，并可以对某一个进行定制
+		//重写。
+		//这里有一个重要规则 ：作用域的规则 ，clsSubTest13中查不到将向上查找 ，直到找到顶层类
+		//using可以把上层的函数直接填写(或者说拷贝)到本类中，避免跨作用域查找函数名
+protected:
+private:
+};
+
+
+
 class clsTest12
 {
 public:
