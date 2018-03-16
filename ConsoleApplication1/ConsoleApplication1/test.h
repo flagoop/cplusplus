@@ -1,6 +1,31 @@
 #pragma once
 #include"stdafx.h"
 
+class clsTest16
+{
+public:
+	clsTest16() = default;
+	clsTest16(int i,const string &s):i(i),strName(s){}
+	virtual	void pt() { cout << "i=" << i << " name:" << strName << endl; }
+	virtual	~clsTest16(){}
+protected:
+private:
+	int i;
+	string strName;
+};
+class clsSubTest16:public	clsTest16
+{
+public:
+	clsSubTest16() = default;
+	clsSubTest16(int i,const string &s,int j):clsTest16(i,s),subi(j){}
+	void pt()override {
+		cout << "clsSubTest16: " << "subi:"<<subi<< endl;
+	}
+protected:
+private:
+	int subi;
+};
+
 class clsTest15
 {
 public:
