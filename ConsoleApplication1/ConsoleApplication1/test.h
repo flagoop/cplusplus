@@ -1,6 +1,16 @@
 #pragma once
 #include"stdafx.h"
 
+class clsTest18
+{
+public:
+	clsTest18(int i = 0) :iPrice(i) {}
+	friend	bool operator<(const clsTest18 &obj1, const clsTest18 &obj2);
+protected:
+private:
+	int iPrice;
+};
+
 class clsTest16
 {
 public:

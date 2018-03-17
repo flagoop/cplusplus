@@ -275,6 +275,17 @@ void clsStrVec::chkFree()
 	}
 }
 
+bool operator<(const clsTest18 & obj1, const clsTest18 & obj2)
+{
+	if (obj1.iPrice < obj2.iPrice)
+	{
+		return 1;
+	}
+
+	return 0;
+}
+
+
 ostream & operator<<(ostream & os, clsOperatorTest2 & obj)
 {
 	// TODO: 在此处插入 return 语句
