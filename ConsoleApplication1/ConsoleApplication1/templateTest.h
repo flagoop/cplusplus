@@ -1,6 +1,12 @@
 #pragma once
 
 template<typename T,size_t N>
+constexpr size_t reArrSize(T (&rarr)[N])
+{
+	return N;
+}
+
+template<typename T,size_t N>
 T* mybeg(T(&rarr)[N])
 {
 	return (rarr);
