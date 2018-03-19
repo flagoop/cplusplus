@@ -1,5 +1,42 @@
 #pragma once
 
+class clstmp1;
+template<typename T>
+class clsTemplateTest1
+{
+public:
+	friend	clsTmp1;
+	clsTemplateTest1(T &t):val(t){}
+	clsTemplateTest1(T &&t) :val(t) {}
+
+	void pt() { cout << "val=" << val << endl; }
+protected:
+private:
+	T val;
+	int j=100;
+};
+
+class clsTmp2
+{
+public:
+	friend	class clsTmp1;
+protected:
+private:
+	int k = 120;
+};
+
+class clsTmp1
+{
+public:
+
+	clsTmp1() { i = k; }
+	//clsTmp1(int i = 0) :i(j) {}
+	friend	ostream& operator<<(ostream &os, const clsTmp1 &obj);
+protected:
+private:
+	int i;
+};
+
 template<typename T,size_t N>
 constexpr size_t reArrSize(T (&rarr)[N])
 {
