@@ -1,9 +1,20 @@
 #include "stdafx.h"
 #include "templateTest.h"
+#include "test.h"
+
 
 ostream & operator<<(ostream & os, const clsTmp1 & obj)
 {
 	// TODO: 在此处插入 return 语句
-	os <<"clsTmp1: "<< obj.i << endl;
+	os << "operator<<(ostream & os, const clsTmp1 & obj): " << obj.i << endl;
+	
+	return os;
+}
+
+template<typename T>
+ostream & operator<<(ostream & os, const clsTemplateTest1<T>& obj)
+{
+	// TODO: 在此处插入 return 语句
+	os << "operator<<(ostream & os, const clsTemplateTest1<clsTmp1>& obj): "<< obj.val << endl;
 	return os;
 }

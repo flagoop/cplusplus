@@ -1,11 +1,22 @@
 #pragma once
 
-class clstmp1;
+
+
+class clsTmp1;
 template<typename T>
 class clsTemplateTest1
 {
 public:
-	friend	clsTmp1;
+	friend	class clsTmp1;
+	//定义下列友元，只因为定义了friend class clsTemp1，来测试不管T为什么类型，
+	//clsTmp1里的成员函数pt(clsTemplateTest1<clsTmp1> &obj)都能访问私有数据T val;
+	//逻辑上无意义
+	//friend	ostream& operator<<(ostream &os, const clsTemplateTest1<clsTmp1> &obj); 
+	//typename<typename X>
+	friend	ostream& operator<<(ostream &os, const clsTemplateTest1<T> &obj);
+
+
+	clsTemplateTest1():val(T()){}
 	clsTemplateTest1(T &t):val(t){}
 	clsTemplateTest1(T &&t) :val(t) {}
 
@@ -16,25 +27,19 @@ private:
 	int j=100;
 };
 
-class clsTmp2
-{
-public:
-	friend	class clsTmp1;
-protected:
-private:
-	int k = 120;
-};
 
 class clsTmp1
 {
 public:
+	friend	ostream& operator<<(ostream& os, const clsTmp1 &obj);
+	clsTmp1() = default;
+	clsTmp1(int i):i(i){}
+	void pt(clsTemplateTest1<clsTmp1> &obj) { cout << obj.val << endl; }
 
-	clsTmp1() { i = k; }
-	//clsTmp1(int i = 0) :i(j) {}
-	friend	ostream& operator<<(ostream &os, const clsTmp1 &obj);
+	//void pt2(clsTemplateTest1<> &obj){ cout << obj.val << endl; } //error
 protected:
 private:
-	int i;
+	int i = 250;
 };
 
 template<typename T,size_t N>
