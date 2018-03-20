@@ -3,7 +3,7 @@
 #include "test.h"
 
 
-ostream & operator<<(ostream & os, const clsTmp1 & obj)
+ostream & operator<<(ostream & os, const clsTemplateFriend1 & obj)
 {
 	// TODO: 在此处插入 return 语句
 	os << "operator<<(ostream & os, const clsTmp1 & obj): " << obj.i << endl;
@@ -18,3 +18,4 @@ ostream & operator<<(ostream & os, const clsTemplateTest1<T>& obj)
 	os << "operator<<(ostream & os, const clsTemplateTest1<clsTmp1>& obj): "<< obj.val << endl;
 	return os;
 }
+
