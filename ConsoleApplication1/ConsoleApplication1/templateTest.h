@@ -1,8 +1,43 @@
 #pragma once
 #include "stdafx.h"
 
-template<typename T> using vt = pair<T, T>;
+template<typename T> 
+class clsListItem
+{
+public:
+	void setdata(T &v) { data = v; }
+	void pt() { cout << "data=" << data << endl; }
+protected:
+private:
+	T data;
 
+};
+
+template<typename T>
+class clsList
+{
+public:
+	clsList<T>()=default;
+	clsList<T>(const clsList<T> &obj){}
+	clsList<T>& operator=(const clsList<T> &obj) { *this = obj; return *this; }
+	~clsList()	{}
+
+	//void into(clsListItem<T> &obj, T val)
+	void into(clsListItem<T> *pcls, T val)
+	{
+
+		pcls->setdata(val);
+		//obj.setdata(val);
+
+		//obj.data = val;	//error
+	}
+protected:
+private:
+	T * pf, *pe;
+};
+
+
+template<typename T> using vt = pair<T, T>;
 
 template<typename T>
 class clsTemplateTest2
@@ -14,11 +49,15 @@ public:
 	clsTemplateTest2(T &v):val(v){}
 	clsTemplateTest2(T &&v) :val(v) {}
 
-	void pt() { cout << "val=" << val << endl; }
+	void pt() { cout << "val=" << val <<" si="<<si<< endl; }
+	void setsi(int i) { si = i; }
 protected:
 private:
 	T val;
+	static	int si;
 };
+template<typename T> int clsTemplateTest2<T>::si = 0;
+
 
 class clstmp2
 {
