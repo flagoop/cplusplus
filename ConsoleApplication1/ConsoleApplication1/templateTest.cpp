@@ -11,6 +11,15 @@ ostream & operator<<(ostream & os, const clsTemplateFriend1 & obj)
 	return os;
 }
 
+bool	funtmp1(const clsTmp3 &v1, const clsTmp3 &v2)
+{
+	if (v1 < v2)
+	{
+		return 1;
+	}
+	return 0;
+}
+
 template<typename T>
 ostream & operator<<(ostream & os, const clsTemplateTest1<T>& obj)
 {

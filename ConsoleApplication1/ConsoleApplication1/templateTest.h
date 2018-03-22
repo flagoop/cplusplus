@@ -1,6 +1,59 @@
 #pragma once
 #include "stdafx.h"
 
+template<typename T>
+void funConTmp2(T &con)
+{
+	for_each(begin(con), end(con), [](auto obj) {cout << obj << endl; });
+}
+
+template<typename T>
+void funConTmp(T &con)
+{
+	typename T::size_type len = con.size();
+	typename T::size_type beg = 0;
+	for (beg;beg<len;++beg)
+	{
+		cout << con[beg] << endl;
+	}
+
+	//for (auto &c:con){cout << c << endl;}
+}
+
+
+class clsTmp3
+{
+public:
+	clsTmp3(int i = 0) :val(i) {}
+	bool operator<(const clsTmp3 &obj)const 
+	{
+		if (val<obj.val)
+		{
+			return 1;
+		}
+		
+		return 0;
+	}
+protected:
+private:
+	int val;
+};
+
+bool	funtmp1(const clsTmp3 &v1, const clsTmp3 &v2);
+
+template<typename T, typename F = less<T>>
+bool myTemplateComp(const T&v1, const T&v2, F fun=F())//如果 用的是默认实参less<T> 则F()就是为less<T>建临时对象
+{
+	if (fun(v1, v2))
+	{
+		return 1;
+	}
+	
+	return 0;
+
+}
+
+
 template<typename T> 
 class clsListItem
 {
