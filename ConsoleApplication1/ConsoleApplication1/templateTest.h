@@ -1,6 +1,23 @@
 #pragma once
 #include "stdafx.h"
 
+class clsDebugDelete
+{
+public:
+	clsDebugDelete(ostream &s=std::cerr):os(s){}
+	template<typename T> void operator()(T *p)
+	{
+		os << "clsDebugDelete." << endl;
+		os << "data " << *p << " should be erase...Address:" <<p<< endl;
+		delete p;
+
+	}
+protected:
+private:
+	ostream &os;
+};
+
+
 template<typename T>
 void funConTmp2(T &con)
 {
