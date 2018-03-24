@@ -2,6 +2,8 @@
 #include "templateTest.h"
 #include "test.h"
 
+template	class clstmp4<string>; //在其它cpp文件中的extern指明了<string>类型的模板实例只在此cpp文件中生成 ，不会在
+//每个调用 clstmp4<string>对象的文件中单独产生一个模板实例
 
 ostream & operator<<(ostream & os, const clsTemplateFriend1 & obj)
 {

@@ -1,6 +1,33 @@
 #pragma once
 #include "stdafx.h"
 
+
+template<typename T>
+class clstmp4
+{
+public:
+	void pt() { cout << "clstmp4<T>" << endl; }
+protected:
+private:
+	T val;
+};
+
+//具体化其中的一个类型<double>
+template<>	//用空的<>来具体化某个类型，成员和成员函数可以和通用<T>模板完全不一样
+class clstmp4<double>
+{
+public:
+	void pt() 
+	{
+		cout << "template<> class clstmp4<double>" << endl;
+	}
+protected:
+private:
+	double	d;
+	string	vs;
+};
+
+
 class clsDebugDelete
 {
 public:

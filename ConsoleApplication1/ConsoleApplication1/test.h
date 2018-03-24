@@ -2,6 +2,9 @@
 #include"stdafx.h"
 
 
+
+void funTemplateCls2();
+
 class clsTest18
 {
 public:

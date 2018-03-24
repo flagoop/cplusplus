@@ -1,7 +1,20 @@
 #include "stdafx.h"
 #include "test.h"
+#include "templateTest.h"
 
+extern	template class clstmp4<string>;	 //在tesp.cpp中如果有clstmp4<string> 则extern表示clstmp4类模板在
+//其它cpp文件中生成，而不在此文件中生成，为了减少模板实例化后同一个版本在很多cpp中都产生一个，这个方法就比较有效果了，
+//它可以只生成一份同版本的<string>类型的模板实例，项目大了就效率就比较明显了
 
+void funTemplateCls2()
+{
+
+	clstmp4<int>	ct;
+	ct.pt();
+	clstmp4<string>	ctstr;
+	ctstr.pt();
+
+}
 
 allocator<string> clsStrVec::alloc;
 
