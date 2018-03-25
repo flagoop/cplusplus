@@ -1,6 +1,58 @@
 #pragma once
 #include "stdafx.h"
 
+template<typename T>
+class clsMyshared_ptr
+{
+public:
+	friend	ostream& operator<<(ostream& os, clsMyshared_ptr<T> &obj)
+	{
+		cout << "Address obj " << &obj;
+		return os;
+	}
+	clsMyshared_ptr(T *p = new T()) { pmem = p; ++szCnt; }
+
+	void pt()
+	{
+		cout << szCnt << endl;
+		cout << "Address p: " << p << endl;
+	}
+
+protected:
+private:
+	T		*pmem;
+	size_t	szCnt;
+};
+
+
+
+class clsTmp5
+{
+public:
+	friend ostream& operator<<(ostream &os, clsTmp5 &);
+
+	void pt(){cout<<i<<endl;}
+	
+	~clsTmp5() { cout << "~clsTmp5()" << endl; }
+protected:
+private:
+	//int *pval = new int(77);
+	static	int i;
+};
+
+class clsDeleteTest1
+{
+public:
+	template<typename T> ostream& operator()(T *p)
+	{
+		cout << "deleting..." << endl;
+		cout << p << endl;
+		delete	p;
+		return cout;
+	}
+protected:
+private:
+};
 
 template<typename T>
 class clstmp4
