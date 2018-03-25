@@ -1,6 +1,28 @@
 #pragma once
 #include "stdafx.h"
 
+class clsTmp6
+{
+public:
+	~clsTmp6()
+	{
+		cout << "~clsTmp6()" << endl;
+	}
+protected:
+private:
+};
+
+template<typename T>
+class clsMyunique_ptr
+{
+public:
+protected:
+private:
+	static T *pmem;
+};
+template<typename T> T *clsMyunique_ptr<T>::pmem = nullptr;
+
+
 template<typename T>
 class clsMyshared_ptr
 {
@@ -11,17 +33,49 @@ public:
 		return os;
 	}
 	clsMyshared_ptr(T *p = new T()) { pmem = p; ++szCnt; }
-
+	clsMyshared_ptr(clsMyshared_ptr<T> &obj)
+	{
+		++szCnt;
+		++obj.szCnt;
+		pmem = obj.pmem;
+	}
+	clsMyshared_ptr& operator=(clsMyshared_ptr<T> &obj)
+	{
+		--szCnt;
+		if (szCnt==0)
+		{
+			cout << "szCnt==0" << endl;
+			delete	pmem;
+			pmem = nullptr;
+		}
+		pmem = obj.pmem;
+		++obj.szCnt;
+		return *this;
+	}
+	~clsMyshared_ptr()
+	{
+		cout << "~clsMyshared_ptr()" << endl;
+		if (szCnt==0)
+		{
+			delete pmem;
+			pmem = nullptr;
+		}
+		else
+		{
+			--szCnt;
+		}
+	}
 	void pt()
 	{
-		cout << szCnt << endl;
-		cout << "Address p: " << p << endl;
+		cout <<"szCnt: "<< szCnt <<" *pmem:"<<*pmem<< endl;
+		//cout << "Address p: " << p << endl;
 	}
 
 protected:
 private:
-	T		*pmem;
-	size_t	szCnt;
+	T		*pmem=nullptr;
+	size_t	szCnt=0;
+
 };
 
 
