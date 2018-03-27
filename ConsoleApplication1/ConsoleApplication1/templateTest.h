@@ -32,7 +32,11 @@ public:
 		cout << "Address obj " << &obj;
 		return os;
 	}
-	clsMyshared_ptr(T *p = new T()) { pmem = p; ++szCnt; }
+	clsMyshared_ptr(T *p = new T())
+	{
+		pmem = p; ++szCnt;
+	}
+	
 	clsMyshared_ptr(clsMyshared_ptr<T> &obj)
 	{
 		++szCnt;
@@ -55,6 +59,7 @@ public:
 	~clsMyshared_ptr()
 	{
 		cout << "~clsMyshared_ptr()" << endl;
+
 		if (szCnt==0)
 		{
 			delete pmem;
