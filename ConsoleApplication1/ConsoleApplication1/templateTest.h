@@ -12,15 +12,49 @@ protected:
 private:
 };
 
-template<typename T>
+template<typename T,typename D>
 class clsMyunique_ptr
 {
 public:
+	clsMyunique_ptr(T *p = new T(), D pd =nullptr)
+	{
+		pmem = p;
+		pDel = &pd;
+	}
+	void myreset()
+	{
+		fundel();
+	}
+	void myreset(T &rp)
+	{
+		fundel();
+		pmem = new T(rp);
+
+	}
+	~clsMyunique_ptr()
+	{
+		//(*pDel) ? (*pDel)(pmem) : delete pmem;
+		cout << "~clsMyunique_ptr()" << endl;
+		
+	}
 protected:
 private:
-	static T *pmem;
+	T *pmem;
+	D *pDel;
+	void fundel()
+	{
+		if (pDel)
+		{
+			(*pDel)(pmem);
+		}
+		else
+		{
+			delete pmem;
+			pmem = nullptr;
+		}
+
+	}
 };
-template<typename T> T *clsMyunique_ptr<T>::pmem = nullptr;
 
 
 template<typename T>
@@ -32,11 +66,18 @@ public:
 		cout << "Address obj " << &obj;
 		return os;
 	}
-	clsMyshared_ptr(T *p = new T())
+	
+
+	clsMyshared_ptr(T *p)
 	{
 		pmem = p; ++szCnt;
 	}
-	
+	clsMyshared_ptr(T i)
+	{
+
+	}
+
+		
 	clsMyshared_ptr(clsMyshared_ptr<T> &obj)
 	{
 		++szCnt;
@@ -49,21 +90,39 @@ public:
 		if (szCnt==0)
 		{
 			cout << "szCnt==0" << endl;
-			delete	pmem;
-			pmem = nullptr;
+			if (pdel)
+			{
+				(*pdel)(pmem);
+			}
+			else
+			{
+				delete	pmem;
+				pmem = nullptr;
+
+			}
 		}
 		pmem = obj.pmem;
 		++obj.szCnt;
 		return *this;
 	}
+	
+
 	~clsMyshared_ptr()
 	{
 		cout << "~clsMyshared_ptr()" << endl;
 
 		if (szCnt==0)
 		{
-			delete pmem;
-			pmem = nullptr;
+			if (pdel)
+			{
+				(*pdel)(pmem);
+			}
+			else
+			{
+				delete	pmem;
+				pmem = nullptr;
+
+			}
 		}
 		else
 		{
@@ -78,9 +137,10 @@ public:
 
 protected:
 private:
-	T		*pmem=nullptr;
+	T	*pmem=nullptr;
 	size_t	szCnt=0;
-
+	//clsDeleteTest1	*pdel=nullptr;
+	T	*pdel=nullptr;
 };
 
 
@@ -104,7 +164,7 @@ class clsDeleteTest1
 public:
 	template<typename T> ostream& operator()(T *p)
 	{
-		cout << "deleting..." << endl;
+		cout << "clsDeleteTest1 deleting..." << endl;
 		cout << p << endl;
 		delete	p;
 		return cout;
