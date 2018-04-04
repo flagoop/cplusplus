@@ -1,6 +1,81 @@
 #pragma once
 #include "stdafx.h"
 
+
+template<typename T>
+size_t funTemplate5(vector<T>&rvec, T val)
+{
+	size_t	cnt = 0;
+	for (auto c : rvec)
+	{
+		if (c == val)
+		{
+			++cnt;
+		}
+	}
+	return	cnt;
+}
+//函数特化是不推荐的，因为函数特化本质是和普通函数一样，而且必须要加上inline才能和原版模板函数放在一起
+//否则就会出现重定义，所以不如直接做成一个普通函数，在整体工程编译的时候也少一些奇怪的问题
+//去掉template<>即可
+
+template<>
+inline size_t funTemplate5(vector<double>& rvec, double val)
+//size_t funTemplate5(vector<const char*>& rvec, const char* val)
+{
+	size_t	cnt = 0;
+	for (auto c : rvec)
+	{
+		if (c == val)
+		{
+			++cnt;
+		}
+	}
+	return	cnt;
+}
+
+
+
+template<size_t N,size_t M>
+void funTemplate4(const char(&a1)[N], const char(&a2)[M])
+{
+	cout << "N=" << N << endl;
+	cout << "M=" << M << endl;
+
+	for (size_t i=0;i<N;++i)
+	{
+		cout << a1[i] << ",";
+	}
+	cout << endl;
+	for (size_t i = 0; i < M; ++i)
+	{
+		cout << a2[i] << ",";
+	}
+	cout << endl;
+}
+
+template<typename T,typename...Args>
+ostream& funTemplate3(ostream &os, const T& val, const Args&... rest)
+{
+	os << val << ",";
+	return	funTemplate3(os, rest...);
+}
+
+template<typename T>
+ostream& funTemplate3(ostream &os, const T &val)
+{
+	os << val << endl;
+	return os;
+	//return os << val;
+}
+
+template <typename T,typename...Args>
+void funTemplate2(T &&v1,Args... rest)
+{
+	cout << sizeof...(Args) << endl;
+	cout << sizeof...(rest) << endl;
+}
+
 class clsTmp6
 {
 public:

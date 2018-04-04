@@ -3,6 +3,7 @@
 #include "test.h"
 
 
+
 int clsTmp5::i = 10;
 
 template	class clstmp4<string>; //在其它cpp文件中的extern指明了<string>类型的模板实例只在此cpp文件中生成 ，不会在
