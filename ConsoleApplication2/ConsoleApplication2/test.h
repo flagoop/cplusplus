@@ -1,6 +1,81 @@
 #pragma once
 #include "stdafx.h"
 
+class MyVector
+{
+public:
+	MyVector() = default;
+
+	MyVector(int sz):len(sz),elem(new double[sz])
+	{
+		for (int i=0;i<len;++i)
+		{
+			elem[i] = 0.0;
+		}
+	}
+	MyVector(initializer_list<double> lst) :len(lst.size()), elem(new double[len])
+	{
+		int i = 0;
+		for (auto c:lst)
+		{
+			elem[i] = c;
+			++i;
+		}
+	}
+
+
+	MyVector(MyVector &v):len(v.len),elem(new double[len])
+	{
+		for (int i=0;i<v.len;++i)
+		{
+			elem[i] = v.elem[i];
+		}
+	}
+
+	
+	MyVector(MyVector &&v) :len(v.len), elem(v.elem)
+	{
+		v.len = 0;
+		v.elem = nullptr;
+	}
+	
+	MyVector& operator=(MyVector &&v)
+	{
+		len = v.len;
+		elem = v.elem;
+		v.elem = nullptr;
+		return *this;
+	}
+
+	void set(int pos, double val)
+	{
+		if (pos>=len)
+		{
+			cout << "out of range pos:" << pos << '\n';
+			return;
+		}
+		elem[pos] = val;
+	}
+
+	void pt()const 
+	{
+		for (int i=0;i<len;++i)
+		{
+			cout << elem[i] << " ";
+		}
+		cout << endl;
+	}
+
+	~MyVector()
+	{
+		delete[] elem;
+	}
+private:
+	int len=0;
+	double	*elem=nullptr;
+
+};
+
 class GetWord
 {
 public:
