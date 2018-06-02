@@ -1,6 +1,70 @@
 #pragma once
 #include "stdafx.h"
 
+struct Def_struc
+{
+	//Def_struc() { cout << "Def_struc()" << endl; };
+	Def_struc(int i) { cout << "Def_struc(int)" << endl; };
+	void pt() { cout << "pt()" << endl; }
+};
+
+struct TmpStruct
+{
+	void pt() { cout << "pt()" << endl; }
+	int v1;
+	double	d1;
+	int v2;
+	
+
+
+};
+
+template<typename T,int N>
+struct Arr
+//class Arr
+{
+	//T elem[N];
+	T v1;
+};
+
+class Shape
+{
+public:
+	Shape() { cout << "Shape()" << endl; }
+	Shape& operator=(Shape &v) { cout << "operator=(Shape &)" << endl; return *this; }
+	void pt() { cout <<v1<< " Shape.pt()" << endl; }
+protected:
+private:
+	double v1=1.1;
+};
+
+class Circle :public Shape
+{
+public:
+	Circle() { cout << "Circle()" << endl; }
+	void pt() { cout << c << " Circle.pt()" << endl; }
+protected:
+private:
+	char c = 'A';
+};
+
+
+class Tmpcls
+{
+public:
+	Tmpcls(int i) {}
+	void pt()
+	{
+		for (auto c:v)
+		{
+			cout << c <<'\n';
+		}
+	}
+protected:
+private:
+	vector<int> v;
+};
+
 class MyVector
 {
 public:
@@ -71,7 +135,7 @@ public:
 		delete[] elem;
 	}
 private:
-	int len=0;
+	size_t len=0;
 	double	*elem=nullptr;
 
 };
